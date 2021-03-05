@@ -6,4 +6,3 @@ def test(request):
 
 def test1(request):
 	return render(request, 'home/portfolio-details.html')
-# Create your views here.
