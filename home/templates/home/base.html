@@ -61,7 +61,12 @@
               <li><a href="{% url 'my_posted_resources' %}">Posted Resources</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="{% url 'available'%}">Coupons</a></li>
+          <li class="dropdown"><a href="{% url 'available' %}"><span>Coupons</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'available' %}">All Coupons</a></li>
+              <li><a href="{% url 'available' %}">Purchased Coupons</a></li>
+            </ul>
+          </li>
           <li><a class="nav-link scrollto" href="{% url 'login' %}">Login/Signup</a></li>
           <!-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
