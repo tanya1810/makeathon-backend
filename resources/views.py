@@ -5,6 +5,7 @@ from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from Blockchain_backend.block import write_block, check_integrity
+from user.views import calculate_ratings
 
 # Create your views here.
 @login_required
