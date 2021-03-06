@@ -1,0 +1,10 @@
+{
+    "buyer": "nishant@gmail.com",
+    "seller": "nem.akg@gmail.com",
+    "amount": 0,
+    "resource": "0dfad",
+    "prev_block": {
+        "hash": "3809e270f93feb70d7873f5f412a7597",
+        "filename": "13"
+    }
+}

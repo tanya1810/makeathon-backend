@@ -33,7 +33,7 @@ def post_resource(request):
             with open('media/preview/'+str(f.id)+'_preview.pdf', 'wb+') as fi:
                 output.write(fi)    
 
-            f.preview = 'media/preview/'+str(f.id)+'_preview.pdf'
+            f.preview = 'preview/'+str(f.id)+'_preview.pdf'
             f.owner_id = request.user
             f.save()
 
@@ -73,7 +73,7 @@ def update_resource(request, pk):
             form = UpdateResourceForm(request.POST, instance = resource)
             if form.is_valid():
                 form.save()
-                return redirect('all-resources')
+                return redirect('my_posted_resources')
         form = UpdateResourceForm(instance = resource)
         context = {
             'form' : form,
@@ -90,7 +90,7 @@ def delete_resource(request, pk):
             resource.delete()
         else:
             messages.add_message(request, messages.INFO, 'The resources that have been sold cannot be deleted.')
-    return redirect('all-resources')
+    return redirect('my_posted_resources')
 
 @login_required
 def my_posted_resources(request):
@@ -112,7 +112,7 @@ def my_bought_resources(request):
 def buy_resource(request, pk):
     resource = Resource.objects.get(id=pk)
     if(request.user.coins >= resource.cost):
-        write_block(request.user, resource.owner, resource.cost, resource)
+        write_block(str(request.user), str(resource.owner), resource.cost, resource.title)
         resource.buyer.add(request.user)
         resource.save()
         u = request.user

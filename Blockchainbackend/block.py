@@ -2,7 +2,7 @@ import json
 import os
 import hashlib
 
-BLOCKCHAIN_DIR = 'blockchain/'
+BLOCKCHAIN_DIR = 'Blockchainbackend/blockchain/'
 
 def get_hash(prev_block):
     with open(BLOCKCHAIN_DIR + prev_block, 'rb') as f:
@@ -50,7 +50,7 @@ def write_block(buyer, seller, amount, resource):
 
     current_block = BLOCKCHAIN_DIR + str(len(os.listdir(BLOCKCHAIN_DIR)) + 1)
 
-    with open(current_block, 'w') as f:
+    with open(current_block, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
         f.write('\n')
 
