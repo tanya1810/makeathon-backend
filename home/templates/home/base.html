@@ -64,7 +64,7 @@
           <li class="dropdown"><a href="{% url 'available' %}"><span>Coupons</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'available' %}">All Coupons</a></li>
-              <li><a href="{% url 'available' %}">Purchased Coupons</a></li>
+              <li><a href="{% url 'purchased' %}">Purchased Coupons</a></li>
             </ul>
           </li>
           {% if user.is_authenticated %}
