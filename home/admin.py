@@ -1,8 +1,6 @@
 from django.contrib import admin
-from .models import feed, comments, request, resource
+from .models import feed, comments
 
 # Register your models here.
 admin.site.register(feed)
 # admin.site.register(comments)
-admin.site.register(request)
-admin.site.register(resource)
