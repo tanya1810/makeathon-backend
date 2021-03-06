@@ -1,0 +1,27 @@
+{% crispy_forms_tags %}
+<html>
+    <head>
+        <title>{{user.name}}</title>
+    </head>
+    <body>
+        <h1>{{user.name}}</h1>
+        <h3>{{user.ratings}}/5</h3>
+
+        Rate user:
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="rate">
+        </form>
+
+        {% for resource in resources %}
+            <p>{{resource.resource_attachment}}</p>
+            <p>{{resource.owner}}</p>
+            <p>{{reosurce.cost}}</p>
+            <p>No.of likes :  {{resource.liked_by.count}}</p>
+            <p>{{resource.title}}</p>
+            <p>{{resource.subject}}</p>
+            <hr> <hr>
+        {% endfor %}
+    </body>
+</html>

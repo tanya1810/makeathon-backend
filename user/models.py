@@ -19,6 +19,7 @@ class User(AbstractUser):
 	name 				= models.CharField(max_length=50)
 	contact_no 			= PhoneNumberField(blank=False, null=False, help_text='Add country code before the contact no.')
 	coins				= models.IntegerField(default=50)
+	ratings				= models.IntegerField(default=0)
 	is_student			= models.BooleanField(default=False)
 	is_company 			= models.BooleanField(default=False)
 	USERNAME_FIELD 		= 'email' 
@@ -32,6 +33,6 @@ class User(AbstractUser):
 		return self.email
 
 class Rating(models.Model):
-	rated_by			= models.ForeignKey(User, limit_choices_to={'is_student': True}, on_delete=models.CASCADE, related_name='rating')
-	rating_of			= models.ForeignKey(User, limit_choices_to={'is_student': True}, on_delete=models.CASCADE, related_name='myrating')
+	rated_by			= models.ForeignKey(User, null=True, limit_choices_to={'is_student': True}, on_delete=models.CASCADE, related_name='rating')
+	rating_of			= models.ForeignKey(User, null=True, limit_choices_to={'is_student': True}, on_delete=models.CASCADE, related_name='myrating')
 	ratings				= models.IntegerField(default=0)
