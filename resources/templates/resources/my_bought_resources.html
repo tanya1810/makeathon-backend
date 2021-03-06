@@ -1,0 +1,19 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block head %}
+{% endblock head %}
+
+
+{% block body %}
+<div class = " mb-5" style="margin-top: 150px;">
+{% for resource in resources %}
+            <p>{{resource.resource_attachment}}</p>
+            <p>{{resource.owner}}</p>
+            <p>{{reosurce.cost}}</p>
+            <p>NO.of likes : </p>
+            <p>{{resource.title}}</p>
+            <p>{{resource.subject}}</p>
+            <hr> <hr>
+        {% endfor %}
+    </div>
+{% endblock body %}  

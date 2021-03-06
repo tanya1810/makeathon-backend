@@ -3,8 +3,10 @@ from .models import *
 from .forms import *
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def all_resources(request):
     resources = Resource.objects.order_by('-id')
     context = {
@@ -12,6 +14,7 @@ def all_resources(request):
     }
     return render(request, 'resources/all_resources.html', context)
 
+@login_required
 def post_resource(request):
     if request.method == "POST":
         form = NewResourceForm(request.POST, request.FILES)
@@ -44,6 +47,7 @@ def post_resource(request):
 
     return render(request, 'resources/resource_form.html', context)
 
+@login_required
 def like_resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     if(resource.buyer.filter(id=pk)):
@@ -53,12 +57,14 @@ def like_resource(request, pk):
         messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
     return redirect('all-resources')
 
+@login_required
 def dislike_resource(request, pk):
     res = get_object_or_404(Resource, id=pk)
     res.liked_by.remove(request.user)
     res.save()
     return redirect('all-resources')
 
+@login_required
 def update_resource(request, pk):
     resource = Resource.objects.get(id=pk)
     if(Resource.objects.get(id=pk).owner == request.user):
@@ -75,6 +81,7 @@ def update_resource(request, pk):
         return redirect('all-resources')
     return render(request, 'resources/resource_update.html', context)
 
+@login_required
 def delete_resource(request, pk):
     resource = get_object_or_404(Resource, id=pk)
     if(request.user == resource.owner):
@@ -83,3 +90,19 @@ def delete_resource(request, pk):
         else:
             messages.add_message(request, messages.INFO, 'The resources that have been sold cannot be deleted.')
     return redirect('all-resources')
+
+@login_required
+def my_posted_resources(request):
+    resources = Resource.objects.filter(owner=request.user)
+    context = {
+        'resources': resources,
+    } 
+    return render(request, 'resources/my_posted_resources.html', context)
+
+@login_required
+def my_bought_resources(request):
+    resources = Resource.objects.filter(buyer=request.user)
+    context = {
+        'resources': resources,
+    } 
+    return render(request, 'resources/my_bought_resources.html', context)
