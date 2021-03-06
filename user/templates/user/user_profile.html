@@ -1,27 +1,55 @@
-{% crispy_forms_tags %}
-<html>
-    <head>
-        <title>{{user.name}}</title>
-    </head>
-    <body>
-        <h1>{{user.name}}</h1>
-        <h3>{{user.ratings}}/5</h3>
+{% extends "home/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <title>{{user.name}}</title>
+{% endblock head %}
+{% block body %}
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>User Profile</li>
+      </ol>
+    </div>
+</section>
 
-        Rate user:
-        <form method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" value="rate">
-        </form>
-
-        {% for resource in resources %}
-            <p>{{resource.resource_attachment}}</p>
-            <p>{{resource.owner}}</p>
-            <p>{{reosurce.cost}}</p>
-            <p>No.of likes :  {{resource.liked_by.count}}</p>
-            <p>{{resource.title}}</p>
-            <p>{{resource.subject}}</p>
-            <hr> <hr>
-        {% endfor %}
-    </body>
-</html>
+<div class="section-title">
+    <h1>{{user.name}}</h1>
+    <h3>{{user.ratings}}/5</h3>
+</div>
+<center>
+    <h2>Rate user:</h2>
+    <form method="POST" style="max-width: 40%;">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <input type="submit" class="btn btn-danger" value="Rate">
+    </form>
+</center>
+    {<section id="pricing" class="pricing">
+        <div class="container">
+            <div class="row">
+                {% for resource in resources %}
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box recommended">
+                        <span class="recommended-badge">By: {{resource.owner.name}}</span>
+                        <h3>{{resource.title}}</h3>
+                        <iframe frameborder="0" scrolling="no"
+                            width="90%" height="20%"
+                            src="{{resource.preview.url}}">
+                        </iframe>
+                        <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
+                        <h3>Subject: {{resource.subject.subject_name}}</h3>
+                        <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Buy Now</a>
+                        </div>
+                        <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock body %}
