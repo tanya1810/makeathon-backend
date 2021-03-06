@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 from PyPDF2 import PdfFileWriter, PdfFileReader
@@ -43,3 +43,16 @@ def post_resource(request):
     }
 
     return render(request, 'resources/resource_form.html', context)
+
+def like_resource(request, pk):
+    resource = get_object_or_404(Resource, id=pk)
+    if(resource.buyer.filter(id=pk)):
+        resource.liked_by.add(request.user)
+        resource.save()
+    return redirect('all-resources')
+
+def dislike_resource(request, pk):
+    res = get_object_or_404(Resource, id=pk)
+    res.liked_by.remove(request.user)
+    res.save()
+    return redirect('all-resources')
