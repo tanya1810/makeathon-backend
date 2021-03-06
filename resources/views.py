@@ -75,3 +75,11 @@ def update_resource(request, pk):
         return redirect('all-resources')
     return render(request, 'resources/resource_update.html', context)
 
+def delete_resource(request, pk):
+    resource = get_object_or_404(Resource, id=pk)
+    if(request.user == resource.owner):
+        if not resource.buyer.exists():
+            resource.delete()
+        else:
+            messages.add_message(request, messages.INFO, 'The resources that have been sold cannot be deleted.')
+    return redirect('all-resources')
