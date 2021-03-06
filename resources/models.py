@@ -1,6 +1,6 @@
 from django.db import models
 from user.models import User
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
 
 class YrBranch(models.Model):
     year                        = models.IntegerField(default=0)
@@ -19,12 +19,15 @@ class Subject(models.Model):
         return self.subject_code
 
 class Resource(models.Model):
-    resource_attachment         = models.FileField()
-    owner                       = models.ForeignKey(User, limit_choices_to={'is_student': True}, on_delete=models.CASCADE)
+    pdf_file                    = models.FileField(default='', upload_to='resources/',
+                                validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+    preview                     = models.FileField(default='', upload_to='preview/', validators=[FileExtensionValidator(allowed_extensions=['pdf'])])
+    owner                       = models.ForeignKey(User, null = True, limit_choices_to={'is_student': True}, on_delete=models.CASCADE)
     cost                        = models.IntegerField(default=0)
     buyer                       = models.ManyToManyField(User, limit_choices_to={'is_student': True}, related_name='bought_resources')
     liked_by                    = models.ManyToManyField(User, limit_choices_to={'is_student': True}, related_name='liked_resources')
     title                       = models.CharField(default=0, max_length=100)
+    description                 = models.TextField(default='')
     subject                     = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
     def __str__(self):

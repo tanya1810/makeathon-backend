@@ -1,0 +1,10 @@
+{
+    "buyer": "A",
+    "seller": "B",
+    "amount": 1000,
+    "resource": "notes",
+    "prev_block": {
+        "hash": "",
+        "filename": ""
+    }
+}

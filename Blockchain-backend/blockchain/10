@@ -1,0 +1,10 @@
+{
+    "buyer": "A",
+    "seller": "V",
+    "amount": 100,
+    "resource": "Test",
+    "prev_block": {
+        "hash": "4563e515a4d154d126898d09f61c2a01",
+        "filename": "9"
+    }
+}
