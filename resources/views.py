@@ -4,7 +4,7 @@ from .forms import *
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from Blockchain-backend.block import write_block, check_integrity
+from Blockchainbackend.block import write_block, check_integrity
 
 # Create your views here.
 @login_required
@@ -120,6 +120,6 @@ def buy_resource(request, pk):
         u.save()
         return redirect('my_bought_resources')
     else:
-        messages.add_message(request, messages.INFO, 'you don't have enough ecoins.')
+        messages.add_message(request, messages.INFO, 'you don\'t have enough ecoins.')
 
     return redirect('all-resources')
