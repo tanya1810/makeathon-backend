@@ -3,11 +3,10 @@ from .models import Resource
 
 # Create your views here.
 def all_resources(request):
-    resources = Resource.objects.order_by(['-id'])
+    resources = Resource.objects.all()
     context = {
         'resources' : resources,
     }
-    return render(request, 'resource/all_resources.html', context)
-
-
+    print(resources)
+    return render(request, 'resources/all_resources.html', context)
     
