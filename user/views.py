@@ -8,8 +8,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 User = get_user_model()
 from django.contrib.auth.decorators import login_required
-
-
+from resources.models import Resource
 
 def register(request):
     if request.method == 'POST':
@@ -26,5 +25,15 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'user/register.html', {'form': form})
+
+def user_profile(request, pk):
+    user = User.objects.get(id=pk)
+    resources = Resource.objects.filter(owner=user)
+    context = {
+        'user' : user,
+        'resources' : resources,
+    }
+
+    return render(request, 'user/user_profile.html', context)
 
 
