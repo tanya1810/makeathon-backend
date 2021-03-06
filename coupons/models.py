@@ -8,7 +8,7 @@ class AvailableCoupons(models.Model):
     cost                        = models.IntegerField(default=0)
     active                      = models.BooleanField(default=True)
     def __str__(self):
-        return self.company
+        return self.company.name + self.description
 
 class PurchasedCoupons(models.Model):
     coupon                      = models.ForeignKey(AvailableCoupons, on_delete=models.CASCADE)
