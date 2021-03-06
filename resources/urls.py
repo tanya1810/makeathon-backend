@@ -11,4 +11,5 @@ urlpatterns = [
     path('delete/<int:pk>/', delete_resource, name='delete_resource'),
     path('my/posted/resources/', my_posted_resources, name='my_posted_resources'),
     path('my/bought/resources/', my_bought_resources, name='my_bought_resources'),
+    path('buy/resource/<int:pk>', buy_resource, name='buy_resource'),
 ]
