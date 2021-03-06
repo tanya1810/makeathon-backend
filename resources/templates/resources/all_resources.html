@@ -35,17 +35,13 @@
                     <div class="btn-wrap">
                         <a href="{% url 'buy_resource' resource.id %}" class="btn-buy">Buy Now</a>
                     </div>
-                    {% for like in resource.liked_by.all %}
 
-                        {% if like == user %}
+                    {% if request.user in resource.liked_by.all %}
+                    <span><a class="btn btn-danger" href="{% url 'dislike_resource' resource.id %}"><i class="fas fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
+                    {% else %}
+                    <span><a class="btn btn-danger" href="{% url 'like_resource' resource.id %}"><i class="far fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
+                    {% endif %}
 
-                        <span><a class="btn btn-danger" href="{% url 'dislike_resource' resource.id %}"><i class="fas fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
-
-                        {% else %}
-                        <span><a class="btn btn-danger" href="{% url 'like_resource' resource.id %}"><i class="far fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
-
-                        {% endif %}
-                    {% endfor %}
                 </div>
             </div>
             {% endfor %}
