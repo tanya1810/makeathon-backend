@@ -9,7 +9,7 @@ urlpatterns = [
     path('dislike/<int:pk>/', dislike_resource, name='dislike_resource'),
     path('update/resource/<int:pk>/', update_resource, name='update_resource'),
     path('delete/<int:pk>/', delete_resource, name='delete_resource'),
-    path('my/posted/resources/', my_posted_resources, name='my_posted_resources'),
+    path('', my_posted_resources, name='my_posted_resources'),
     path('my/bought/resources/', my_bought_resources, name='my_bought_resources'),
     path('buy/resource/<int:pk>', buy_resource, name='buy_resource'),
 ]

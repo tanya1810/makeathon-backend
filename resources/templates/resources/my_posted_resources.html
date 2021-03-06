@@ -33,7 +33,8 @@
                         <h3>Subject: {{resource.subject.subject_name}}</h3>
                         <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
                         <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Update</a>
+                            <a href="{% url 'update_resource' resource.id %}" class="btn-buy">Update</a>
+                            <a href="{% url 'delete_resource' resource.id %}" class="btn-buy">Delete</a>
                         </div>
                         <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
                     </div>

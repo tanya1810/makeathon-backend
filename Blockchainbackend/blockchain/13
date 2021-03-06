@@ -1,0 +1,10 @@
+{
+    "buyer": "nishant@gmail.com",
+    "seller": "nishant@gmail.com",
+    "amount": 10,
+    "resource": "sdsad",
+    "prev_block": {
+        "hash": "204ed3e1e3a7744c017e030da614bf62",
+        "filename": "12"
+    }
+}
