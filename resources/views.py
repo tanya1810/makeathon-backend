@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
 from PyPDF2 import PdfFileWriter, PdfFileReader
-
+from django.contrib import messages
 
 # Create your views here.
 def all_resources(request):
@@ -43,3 +43,35 @@ def post_resource(request):
     }
 
     return render(request, 'resources/resource_form.html', context)
+
+def like_resource(request, pk):
+    resource = get_object_or_404(Resource, id=pk)
+    if(resource.buyer.filter(id=pk)):
+        resource.liked_by.add(request.user)
+        resource.save()
+    else:
+        messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
+    return redirect('all-resources')
+
+def dislike_resource(request, pk):
+    res = get_object_or_404(Resource, id=pk)
+    res.liked_by.remove(request.user)
+    res.save()
+    return redirect('all-resources')
+
+def update_resource(request, pk):
+    resource = Resource.objects.get(id=pk)
+    if(Resource.objects.get(id=pk).owner == request.user):
+        if(request.method == 'POST'):
+            form = UpdateResourceForm(request.POST, instance = resource)
+            if form.is_valid():
+                form.save()
+                return redirect('all-resources')
+        form = UpdateResourceForm(instance = resource)
+        context = {
+            'form' : form,
+        }
+    else:
+        return redirect('all-resources')
+    return render(request, 'resources/resource_update.html', context)
+
