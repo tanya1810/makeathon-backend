@@ -50,8 +50,8 @@ def post_resource(request):
 
 @login_required
 def like_resource(request, pk):
-    resource = get_object_or_404(Resource, id=pk)
-    if(resource.buyer.filter(id=pk)):
+    resource = get_object_or_404(Resource, id=pk, buyer=request.user)
+    if(resource):
         resource.liked_by.add(request.user)
         resource.save()
     else:
