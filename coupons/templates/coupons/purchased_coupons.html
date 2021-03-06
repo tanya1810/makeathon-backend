@@ -1,0 +1,45 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+
+  <main id="main">
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Coupons</a></li>
+          <li>Purchased Coupons</li>
+        </ol>
+        <h2>Purchased Coupons</h2>
+
+      </div>
+    </section>
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title">
+          <h3>My <span>Coupons</span></h3>
+        </div>
+        <div class="row" style="display: flex; justify-content: center;">
+        {% for coupon in coupons %}
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box">
+              <div class="icon"><i class="fas fa-store"></i></div>
+              <h4 class="title"><a href="">{{ coupon.company.name }}</a></h4>
+              <p class="description">{{ coupon.description }}</p>
+              <p class="description">{{ coupon.cost }}</p>
+              <p class="description" style="border-style: solid; border-width: thin; margin-top: 25px;"><a class="description" href = "{% url 'available' coupon.id %}">Buy</a></p>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+{% endblock body %}
