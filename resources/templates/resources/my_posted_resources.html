@@ -21,8 +21,12 @@
         <div class="container">
             <div class="row">
                 {% for resource in resources %}
+                        
                 <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
                     <div class="box recommended">
+                        
+                <div class="recommended-badge">By: {{resource.owner.name}}</div><br>
+                <div class="recommended-badge" style="margin-top: 35px;">{{resource.owner.ratings}}/5</div>
                         <!-- <span class="recommended-badge">By: {{resource.owner.name}}</span> -->
                         <h3>{{resource.title}}</h3>
                         <iframe frameborder="0" scrolling="no"
