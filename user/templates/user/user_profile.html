@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>{{user.name}}</title>
+    </head>
+    <body>
+        <h1>{{user.name}}</h1>
+        {% for resource in resources %}
+            <p>{{resource.resource_attachment}}</p>
+            <p>{{resource.owner}}</p>
+            <p>{{reosurce.cost}}</p>
+            <p>No.of likes :  {{resource.liked_by.count}}</p>
+            <p>{{resource.title}}</p>
+            <p>{{resource.subject}}</p>
+            <hr> <hr>
+        {% endfor %}
+    </body>
+</html>
