@@ -18,6 +18,9 @@ class User(AbstractUser):
 	email 				= models.EmailField(verbose_name='Email Address', unique=True)
 	name 				= models.CharField(max_length=50)
 	contact_no 			= PhoneNumberField(blank=False, null=False, help_text='Add country code before the contact no.')
+	coins				= models.IntegerField(default=50)
+	is_student			= models.BooleanField(default=False)
+	is_company 			= models.BooleanField(default=False)
 	USERNAME_FIELD 		= 'email' 
 	user_permissions 	= None
 	groups 				= None
@@ -28,4 +31,7 @@ class User(AbstractUser):
 	def __str__(self):
 		return self.email
 
-# Create your models here.
+class Rating(models.Model):
+	rated_by			= models.ForeignKey(User, limit_choices_to={'is_student': True}, on_delete=models.CASCADE, related_name='rating')
+	rating_of			= models.ForeignKey(User, limit_choices_to={'is_student': True}, on_delete=models.CASCADE, related_name='myrating')
+	ratings				= models.IntegerField(default=0)
