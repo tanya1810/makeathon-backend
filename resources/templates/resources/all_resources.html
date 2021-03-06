@@ -3,6 +3,7 @@
 {% block head %}
 {% endblock head %}
 {% block body %}
+
 <div class=" mb-5" style="margin-top: 100px;">
 </div>
 
@@ -24,7 +25,7 @@
                     <div class="btn-wrap">
                         <a href="#" class="btn-buy">Buy Now</a>
                     </div>
-                    <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;"> 199</span>
+                    <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
                 </div>
             </div>
             {% endfor %}
