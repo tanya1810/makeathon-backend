@@ -4,6 +4,7 @@ from .forms import *
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from Blockchainbackend.block import write_block, check_integrity
 
 # Create your views here.
 @login_required
@@ -49,8 +50,8 @@ def post_resource(request):
 
 @login_required
 def like_resource(request, pk):
-    resource = get_object_or_404(Resource, id=pk)
-    if(resource.buyer.filter(id=pk)):
+    resource = get_object_or_404(Resource, id=pk, buyer=request.user)
+    if(resource):
         resource.liked_by.add(request.user)
         resource.save()
     else:
@@ -106,3 +107,19 @@ def my_bought_resources(request):
         'resources': resources,
     } 
     return render(request, 'resources/my_bought_resources.html', context)
+
+@login_required
+def buy_resource(request, pk):
+    resource = Resource.objects.get(id=pk)
+    if(request.user.coins >= resource.cost):
+        write_block(request.user, resource.owner, resource.cost, resource)
+        resource.buyer.add(request.user)
+        resource.save()
+        u = request.user
+        u.coins -= resource.cost
+        u.save()
+        return redirect('my_bought_resources')
+    else:
+        messages.add_message(request, messages.INFO, 'you don\'t have enough ecoins.')
+
+    return redirect('all-resources')

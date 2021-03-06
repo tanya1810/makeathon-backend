@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from phonenumber_field.formfields import PhoneNumberField
 from django.db import transaction
-from .models import User
+from .models import *
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
@@ -16,3 +16,7 @@ class UserRegistrationForm(UserCreationForm):
 		model 		= User
 		fields 		= ['name','email','contact_no', 'password1','password2']
 
+class RatingsForm(forms.ModelForm):
+	class Meta():
+		model		= Rating
+		fields		= ['ratings']

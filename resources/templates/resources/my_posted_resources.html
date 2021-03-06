@@ -5,15 +5,41 @@
 
 
 {% block body %}
-<div class = " mb-5" style="margin-top: 150px;">
-{% for resource in resources %}
-            <p>{{resource.resource_attachment}}</p>
-            <p>{{resource.owner}}</p>
-            <p>{{reosurce.cost}}</p>
-            <p>No.of likes :  {{resource.liked_by.count}}</p>
-            <p>{{resource.title}}</p>
-            <p>{{resource.subject}}</p>
-            <hr> <hr>
-        {% endfor %}
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
+
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>Resource</li>
+      </ol>
+      <h2>My Posted Resources</h2>
+
     </div>
+  </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="row">
+                {% for resource in resources %}
+                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                    <div class="box recommended">
+                        <!-- <span class="recommended-badge">By: {{resource.owner.name}}</span> -->
+                        <h3>{{resource.title}}</h3>
+                        <iframe frameborder="0" scrolling="no"
+                            width="90%" height="20%"
+                            src="{{resource.preview.url}}">
+                        </iframe>
+                        <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
+                        <h3>Subject: {{resource.subject.subject_name}}</h3>
+                        <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn-buy">Update</a>
+                        </div>
+                        <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock body %}  
