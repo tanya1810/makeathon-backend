@@ -34,7 +34,17 @@
                     <div class="btn-wrap">
                         <a href="#" class="btn-buy">Buy Now</a>
                     </div>
-                    <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
+                    {% for like in resource.liked_by.all %}
+
+                        {% if like == user %}
+
+                        <span><a class="btn btn-danger" href="{% url 'dislike_resource' resource.id %}"><i class="fas fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
+
+                        {% else %}
+                        <span><a class="btn btn-danger" href="{% url 'like_resource' resource.id %}"><i class="far fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
+
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
             {% endfor %}
