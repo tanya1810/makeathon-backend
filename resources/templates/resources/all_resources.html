@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>All Resources</title>
+    </head>
+    <body>
+        {% for resource in resources %}
+            {{resource.resource_attachment}}
+            {{resource.owner}}
+            {{reosurce.cost}}
+            NO.of likes
+            {{resource.title}}
+            {{resource.subject}}
+
+        {% endfor %}
+    </body>
+</html>
