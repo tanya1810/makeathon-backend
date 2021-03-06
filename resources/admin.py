@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Resource, Subject, YrBranch
-admin.site.register(Resource)
-admin.site.register(Subject)
-admin.site.register(YrBranch)
+from .models import *
+
 # Register your models here.
+admin.site.register(Subject)
+admin.site.register(Resource)
+admin.site.register(YrBranch)
