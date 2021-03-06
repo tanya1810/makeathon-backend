@@ -7,4 +7,5 @@ urlpatterns = [
     path('new/resource/', post_resource, name='post_resource'),
     path('like/<int:pk>/', like_resource, name='like_resource'),
     path('dislike/<int:pk>/', dislike_resource, name='like_resource'),
+    path('update/resource/<int:pk>', update_resource, name='update_resource'),
 ]
