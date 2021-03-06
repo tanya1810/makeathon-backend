@@ -2,18 +2,33 @@
 {% load static %}
 {% block head %}
 {% endblock head %}
-
-
 {% block body %}
-<div class = " mb-5" style="margin-top: 150px;">
-{% for resource in resources %}
-            <p>{{resource.resource_attachment}}</p>
-            <p>{{resource.owner}}</p>
-            <p>{{reosurce.cost}}</p>
-            <p>NO.of likes : </p>
-            <p>{{resource.title}}</p>
-            <p>{{resource.subject}}</p>
-            <hr> <hr>
-        {% endfor %}
+<div class=" mb-5" style="margin-top: 100px;">
+</div>
+
+<section id="pricing" class="pricing">
+    <div class="container">
+        <div class="row">
+            {% for resource in resources %}
+            <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                <div class="box recommended">
+                    <span class="recommended-badge">By: {{resource.owner}}</span><br>
+                    <h3>{{resource.title}}</h3>
+                    <p>.</p>
+                    <p>.</p>
+                    <p>.</p>
+                    <p>.</p>
+                    <h3>Subject: {{resource.subject.subject_name}}</h3>
+                    <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
+                    <div class="btn-wrap">
+                        <a href="#" class="btn-buy">Buy Now</a>
+                    </div>
+                    <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;"> 199</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-{% endblock body %}  
+</section>
+
+        {% endblock body %}
