@@ -56,9 +56,14 @@
               <div class="entry-content">
                 <p> {{feed.description}}
                 </p>
-                <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
-                </div>
+                <div style="display: flex;">
+                  <div class="read-more">
+                    <a href="blog-single.html">Read More</a>
+                  </div> &nbsp
+                  <div class="read-more">
+                    <a href="{% url 'update_feed' feed.id%}">Update Feed</a>
+                  </div>
+                  </div>
               </div>
 
             </article> 

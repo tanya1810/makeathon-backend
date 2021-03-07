@@ -1,13 +1,43 @@
-{% load crispy_forms_tags %}
-<html>
-    <head>
-    <title>Update Post</title>
-    </head>
-    <body>
-        <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form|crispy}}
-        <input type="submit" value="Update" />
-        </form>
-    </body>
-</html>
+
+
+
+
+{% extends "home/base.html" %}
+{% load static %}
+{% block head %}
+{% endblock head %}
+{% load crispy_forms_tags %} 
+
+{% block body %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li>Feed</li>
+        </ol>
+        <h2>Update Feed</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-12 mt-5 mt-lg-0">
+            <form method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <br>
+                <input type="submit" class="btn btn-danger" value="Update">
+            </form>
+          </div>
+
+  </main><!-- End #main -->
+
+{% endblock body %}
