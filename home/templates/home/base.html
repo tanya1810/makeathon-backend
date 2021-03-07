@@ -43,19 +43,16 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto " href="{% url 'feeds' %}">Feed</a></li>
+          <li class="dropdown"><a href="{% url 'feeds' %}"><span>Feed</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{% url 'feeds' %}">All Feeds</a></li>
+              <li><a href="{% url 'my_feeds' %}">My Feeds</a></li>
+            </ul>
+          </li>
           <li class="dropdown"><a href="{% url 'all-resources' %}"><span>Resources</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="{% url 'all-resources' %}">All Resources</a></li>
-              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li> -->
+            
               <li><a href="{% url 'post_resource' %}">Add Resource</a></li>
               <li><a href="{% url 'my_bought_resources' %}">Bought Resources</a></li>
               <li><a href="{% url 'my_posted_resources' %}">Posted Resources</a></li>

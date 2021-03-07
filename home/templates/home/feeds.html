@@ -43,7 +43,7 @@
               </div>
 
               <h2 class="entry-title">
-                <a href="blog-single.html">{{feed.head}}</a>
+                <a href="blog-single.html">{{feed.title}}</a>
               </h2>
 
               <div class="entry-meta">
@@ -53,10 +53,10 @@
               </div>
 
               <div class="entry-content">
-                <p> {{feed.text}}
+                <p> {{feed.description}}
                 </p>
                 <div class="read-more">
-                  <a href="blog-single.html">Read More</a>
+                  <a href="{% url 'feed_details' feed.id %}">Read More</a>
                 </div>
               </div>
 

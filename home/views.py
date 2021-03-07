@@ -18,16 +18,6 @@ def feeds_home(request):
 	}
 	return render(request, 'home/feeds.html', context)
 
-
-def feed_details(request, pk):
-	feed = Feed.objects.filter(id = pk)
-	comment = Comments.objects.filter(feed=feed)
-	context = {
-		'feed' : feed,
-		'comment' : comment
-	}
-	return render(request, 'home/feeds-single.html')
-
 def delete_feed(request, pk):
 	feed = Feed.objects.get(id=pk)
 	if(request.user == feed.author):
@@ -68,3 +58,22 @@ def update_feed(request, pk):
 	}
 	return render(request, 'home/update_feed.html', context)
 
+
+def feed_details(request, pk):
+	feed = Feed.objects.get(id = pk)
+	comment = Comments.objects.filter(feed=feed)
+	
+	if(request.method == 'POST'):
+
+		form = AddComment(request.POST)
+		if form.is_valid():
+			form.instance.by_user = request.user
+			form.instance.feed = feed
+			form.save()
+	form = AddComment()
+	context = {
+		'feed' : feed,
+		'comment' : comment,
+		'form' : form,
+	}
+	return render(request, 'home/feeds-single.html', context)
