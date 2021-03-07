@@ -21,15 +21,16 @@
         <div class="row">
             <h2>Filters</h2>
             
-            <div class="input-group mb-3">
+            <form method="GET">
+              <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <button class="btn btn-danger" type="button">Year</button>
                 </div>
-                <input type="text" class="form-control" placeholder="Year" aria-label="" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Year" name="year" aria-label="" aria-describedby="basic-addon1">
               </div>
               
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Branch" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" name="branch" placeholder="Branch" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                   <button class="btn btn-danger" type="button">Branch</button>
                 </div>
@@ -38,8 +39,10 @@
                 <div class="input-group-prepend">
                   <button class="btn btn-danger" type="button">Subject</button>
                 </div>
-                <input type="text" class="form-control" placeholder="Subject" aria-label="" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" aria-label="" aria-describedby="basic-addon1">
               </div>
+              <button type="submit">Search</button>
+            </form>
               <h2>Resources</h2>
             {% for resource in resources %}
             <div class="col-lg-4 col-md-6 mt-4 mt-md-0">

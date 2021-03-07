@@ -9,7 +9,21 @@ from Blockchainbackend.block import write_block, check_integrity
 # Create your views here.
 @login_required
 def all_resources(request):
+    year = request.GET.get('year') or None
+    branch = request.GET.get('branch') or None
+    subject = request.GET.get('subject') or None
+
     resources = Resource.objects.order_by('-id')
+
+    if(subject):
+        resources = resources.filter(subject=subject)
+    
+    if(branch):
+        resources = resources.filter(subject__yr_branch__branch=branch)
+    
+    if(year):
+        resources = resources.filter(subject__yr_branch__year=year)
+
     context = {
         'resources' : resources,
     }
