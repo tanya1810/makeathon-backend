@@ -16,7 +16,9 @@
 
 <div class="section-title">
     <h1>{{user.name}}</h1>
+    {% if request.user == user %}
     <h2>Coins : {{user.coins}}</h2>
+    {% endif %}
     <h3>{{user.ratings}}/5</h3>
 </div>
 <center>
