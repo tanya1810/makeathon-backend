@@ -18,3 +18,12 @@ def feeds_home(request):
 		'feeds'	 : feeds,
 	}
 	return render(request, 'home/feeds.html', context)
+
+def feed_details(request, pk):
+	feed = Feed.objects.filter(id = pk)
+	comment = Comments.objects.filter(feed=feed)
+	context = {
+		'feed' : feed,
+		'comment' : comment
+	}
+	return render(request, 'home/feeds-single.html')
