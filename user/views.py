@@ -42,7 +42,7 @@ def calculate_ratings(id):
     return ratings
 
 @login_required
-def user_profile(request, pk):
+def user_profile_resources(request, pk):
     user = User.objects.get(id=pk)
     if(request.method == 'POST'):
         form = RatingsForm(request.POST)
@@ -59,9 +59,30 @@ def user_profile(request, pk):
         'form' : RatingsForm(),
         'user' : user,
         'resources' : resources,
-        'ratings' : calculate_ratings(pk)
     }
 
-    return render(request, 'user/user_profile.html', context)
+    return render(request, 'user/user_profile_resources.html', context)
+
+@login_required
+def user_profile_feeds(request, pk):
+    user = User.objects.get(id=pk)
+    if(request.method == 'POST'):
+        form = RatingsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form.rating_of = user
+            form.rated_by = request.user
+            form.save()
+            user.ratings = calculate_ratings(pk)
+            user.save()
+
+    feeds = Feeds.objects.filter(author=user)
+    context = {
+        'form' : RatingsForm(),
+        'user' : user,
+        'feeds' : feeds,
+    }
+
+    return render(request, 'user/user_profile_feeds.html', context)
 
 
