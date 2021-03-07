@@ -66,7 +66,7 @@
           </li>
           {% if user.is_authenticated %}
 
-          <li class="dropdown" ><a href="#">Hey {{ user.username }}</a>
+          <li class="dropdown" ><a href="#">Hey {{ user.name }}</a>
             <ul>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 <li><a href="{% url 'user_profile' request.user.id %}">Profile</a></li>

@@ -21,15 +21,6 @@
     {% endif %}
     <h3>{{user.ratings}}/5</h3>
 </div>
-<center>
-    <h2>Rate user:</h2>
-    <form method="POST" style="max-width: 40%;">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <br>
-        <input type="submit" class="btn btn-danger" value="Rate">
-    </form>
-</center>
 
 
 <section id="portfolio" class="portfolio">
@@ -43,6 +34,7 @@
               <!-- <li data-filter="*" class="filter-active">All</li> -->
               <li id="resource" data-filter=".filter-app">Resources</li>
               <li data-filter=".filter-web">Feeds</li>
+              <li data-filter=".filter-app">My Resources</li>
             </ul>
           </div>
         </div>
