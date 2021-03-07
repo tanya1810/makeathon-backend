@@ -33,3 +33,15 @@ def purchased(request, id=None):
 	}
 	return render(request, 'coupons/purchased_coupons.html', context)
 
+def issued_coupons(request, pk = None):	
+	issued = PurchasedCoupons.objects.filter(coupon__company=request.user)
+
+	if pk:
+		to_del = issued.filter(id=pk)
+		to_del.delete()
+
+
+	context = {
+		'issued': issued,
+	}
+	return render(request, 'coupons/issued.html', context)
