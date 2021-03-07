@@ -25,13 +25,14 @@
                     <div class="box recommended">
                         <span class="recommended-badge"><a href="{% url 'user_profile' resource.owner.id %}">By: {{resource.owner.name}}</a></span>
                         <span class="recommended-badge" style="margin-top: 35px;">{{resource.owner.ratings}}/5</span>
-                        <h3>{{resource.title}}</h3>
+                        <br><h3>{{resource.title}}</h3>
                         <iframe frameborder="0" scrolling="no"
                             width="90%" height="20%"
                             src="{{resource.preview.url}}">
                         </iframe>
                         <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
                         <h3>Subject: {{resource.subject.subject_name}}</h3>
+                        <p>{{resource.description}}</p>
                         <a href="{% url 'pdf' resource.id %}">Link</h3>
                         <!-- <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4> -->
                         <!-- <div class="btn-wrap">
