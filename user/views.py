@@ -55,11 +55,13 @@ def user_profile_resources(request, pk):
             user.ratings = calculate_ratings(pk)
             user.save()
 
+    feeds = Feed.objects.filter(author=user)
     resources = Resource.objects.filter(owner=user)
     context = {
         'form' : RatingsForm(),
         'user' : user,
         'resources' : resources,
+        'feeds' : feeds,
     }
 
     return render(request, 'user/user_profile_resources.html', context)

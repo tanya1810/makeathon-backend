@@ -34,7 +34,7 @@
 
               <div class="entry-meta">
                 <ul>
-                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="#">{{ feed.author.name }}</a></li>
+                  <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="{% url 'user_profile' feed.author.id %}">{{ feed.author.name }}</a></li>
                   <li class="d-flex align-items-center"><i class="bi bi-tags"></i> <a href="blog-single.html">{{ feed.post_type }}</a></li>
                 </ul>
               </div>
@@ -73,7 +73,7 @@
               <div id="comment-1" class="comment">
                 <div class="d-flex">
                   <div>
-                    <h5><a href="">{{ commen.by_user.name }}</a> </h5>
+                    <h5><a href="{% url 'user_profile' commen.by_user.id %}">{{ commen.by_user.name }}</a> </h5>
                     <p>
                       {{ commen.text }}
                     </p>
