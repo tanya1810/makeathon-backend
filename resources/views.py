@@ -34,9 +34,8 @@ def post_resource(request):
     if request.method == "POST":
         form = NewResourceForm(request.POST, request.FILES)
         if form.is_valid():
-            print("help")
             f = form.save()
-            pages_to_keep = [1] # page numbering starts from 0
+            pages_to_keep = [0] # page numbering starts from 0
             infile = PdfFileReader(f.pdf_file, 'rb')
             output = PdfFileWriter()
 
