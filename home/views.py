@@ -7,7 +7,7 @@ def feeds_home(request):
 	if(request.method == 'POST'):
 		form = AnswerForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.instance.from_user = request.user
+			form.instance.author = request.user
 			form.save()
 	
 	form = AnswerForm()
@@ -52,8 +52,8 @@ def my_post(request):
 	}
 	return render(request, 'home/my_feeds.html', context)
 
-def update_feed(request, pk):
-	feed = Feed.objects.get(id=pk)
+def update_feed(request, id=None):
+	feed = Feed.objects.get(id=id)
 	if request.method == 'POST':
 		if(request.user == feed.author):
 			form = UpdateFeedForm(request.POST, request.FILES, instance=feed)
