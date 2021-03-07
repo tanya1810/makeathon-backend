@@ -6,5 +6,6 @@ urlpatterns = [
     path('available/<int:id>',			views.available,		name='available'),
     path('purchased/',			views.purchased,		name='purchased'),
     path('issued/<int:pk>',			views.issued_coupons,		name='issued'),
+    # path('issued/<int:pk>',			views.issued_coupons,		name='issued'),
     # path('test1/',            views.test1,     name='test1'),
 ]
