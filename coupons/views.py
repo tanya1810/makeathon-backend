@@ -33,5 +33,17 @@ def purchased(request, id=None):
 	}
 	return render(request, 'coupons/purchased_coupons.html', context)
 
-def dashboard(request):
-	return render(request, 'coupons/dashboard.html')
+def issued_coupons(request, pk = None):	
+	coupon = PurchasedCoupons.objects.filter(coupon__company=request.user)
+
+	if pk:
+		to_del = coupon.filter(id=pk)
+		to_del.delete()
+
+
+	context = {
+		'coupon': coupon,
+	}
+	return render(request, 'coupons/dashboard.html', context)
+# def dashboard(request):
+# 	return render(request, 'coupons/dashboard.html')
