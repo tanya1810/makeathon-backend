@@ -4,7 +4,6 @@ from user.models import User
 from .forms import *
 
 def feeds_home(request):
-	print('hello')
 	if(request.method == 'POST'):
 		form = AnswerForm(request.POST, request.FILES)
 		if form.is_valid():
@@ -27,6 +26,21 @@ def delete_feed(request, pk):
 			messages.add_message(request, messages.INFO, 'You are not authorized to delete this feed.')
 
 	return redirect('feeds')
+
+def my_post(request):
+	if(request.method == 'POST'):
+		form = AnswerForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.instance.from_user = request.user
+			form.save()
+	
+	form = AnswerForm()
+	feeds   = Feed.objects.filter(author=request.user)
+	context = {
+		'form' : form,
+		'feeds'	 : feeds,
+	}
+	return render(request, 'home/my_feeds.html', context)
 
 def update_feed(request, pk):
 	feed = Feed.objects.get(id=pk)
