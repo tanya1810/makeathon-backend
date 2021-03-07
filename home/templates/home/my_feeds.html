@@ -1,0 +1,74 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block head %}
+{% endblock head %}
+{% load crispy_forms_tags %} 
+
+{% block body %}
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li>Feeds</li>
+        </ol>
+        <h2>Home</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-12 mt-5 mt-lg-0" style="border: solid 1px rgba(0,0,0,0.5); padding: 20px; border-radius:10px;">
+            <h1>POST A DOUBT</h1>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button class="btn btn-danger" type="submit" value="Post">Post</button>
+            </form>
+          </div>
+
+          <div class="col-lg-12 mt-5 entries">
+            {% for feed in feeds %}
+            <article class="entry"> 
+
+              <div class="entry-img">
+                <img src="{{ feed.image.url }}" alt="" class="img-fluid">
+              </div>
+
+              <h2 class="entry-title">
+                <a href="blog-single.html">{{feed.head}}</a>
+              </h2>
+
+              <div class="entry-meta">
+                <ul>
+                  <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a>{{feed.post_type}}</a></li>
+                </ul>
+              </div>
+
+              <div class="entry-content">
+                <p> {{feed.text}}
+                </p>
+                <div class="read-more">
+                  <a href="blog-single.html">Read More</a>
+                </div>
+              </div>
+
+            </article> 
+
+            {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+{% endblock body %}
