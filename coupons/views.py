@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.utils.crypto import get_random_string
+from django.db.models import Q
 
 # Create your views here.
 def available(request, id=None):
@@ -34,8 +35,10 @@ def purchased(request, id=None):
 	return render(request, 'coupons/purchased_coupons.html', context)
 
 def issued_coupons(request, pk = None):	
+	q = request.GET['q']
 	coupon = PurchasedCoupons.objects.filter(coupon__company=request.user)
-
+	if(q):
+		coupon = coupon.filter(Q(unique_code__icontains=q))
 	if pk:
 		to_del = coupon.filter(id=pk)
 		to_del.delete()
