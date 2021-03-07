@@ -40,7 +40,11 @@
                             <a href="{% url 'update_resource' resource.id %}" class="btn-buy">Update</a>
                             <a href="{% url 'delete_resource' resource.id %}" class="btn-buy">Delete</a>
                         </div>
-                        <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
+                    {% if request.user in resource.liked_by.all %}
+                    <span><a class="btn btn-danger" href="{% url 'dislike_resource_3' resource.id %}"><i class="fas fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
+                    {% else %}
+                    <span><a class="btn btn-danger" href="{% url 'like_resource_3' resource.id %}"><i class="far fa-heart"></i></a></span><span style="font-size: 18px;">  {{resource.liked_by.count}}</span>
+                    {% endif %}
                     </div>
                 </div>
                 {% endfor %}

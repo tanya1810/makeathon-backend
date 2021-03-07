@@ -49,7 +49,7 @@ def post_resource(request):
     return render(request, 'resources/resource_form.html', context)
 
 @login_required
-def like_resource(request, pk):
+def like_resource_1(request, pk):
     resource = Resource.objects.get(id=pk, buyer=request.user)
     if(resource):
         resource.liked_by.add(request.user)
@@ -59,11 +59,43 @@ def like_resource(request, pk):
     return redirect('all-resources')
 
 @login_required
-def dislike_resource(request, pk):
+def dislike_resource_1(request, pk):
     res = get_object_or_404(Resource, id=pk)
     res.liked_by.remove(request.user)
     res.save()
     return redirect('all-resources')
+
+def like_resource_2(request, pk):
+    resource = Resource.objects.get(id=pk, buyer=request.user)
+    if(resource):
+        resource.liked_by.add(request.user)
+        resource.save()
+    else:
+        messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
+    return redirect('my_bought_resources')
+
+@login_required
+def dislike_resource_2(request, pk):
+    res = get_object_or_404(Resource, id=pk)
+    res.liked_by.remove(request.user)
+    res.save()
+    return redirect('my_bought_resources')
+
+def like_resource_3(request, pk):
+    resource = Resource.objects.get(id=pk, buyer=request.user)
+    if(resource):
+        resource.liked_by.add(request.user)
+        resource.save()
+    else:
+        messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
+    return redirect('my_posted_resources')
+
+@login_required
+def dislike_resource_3(request, pk):
+    res = get_object_or_404(Resource, id=pk)
+    res.liked_by.remove(request.user)
+    res.save()
+    return redirect('my_posted_resources')
 
 @login_required
 def update_resource(request, pk):
@@ -123,3 +155,12 @@ def buy_resource(request, pk):
         messages.add_message(request, messages.INFO, 'you don\'t have enough ecoins.')
 
     return redirect('all-resources')
+
+def pdf(request, id):
+    resource = Resource.objects.get(id = id)
+
+    context = {
+        'resource' : resource
+    }
+
+    return render(request, 'resources/pdf.html', context)
