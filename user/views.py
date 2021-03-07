@@ -9,6 +9,7 @@ from django.http import HttpResponse
 User = get_user_model()
 from django.contrib.auth.decorators import login_required
 from resources.models import Resource
+from home.models import Feed
 
 def register(request):
     if request.method == 'POST':
@@ -76,7 +77,7 @@ def user_profile_feeds(request, pk):
             user.ratings = calculate_ratings(pk)
             user.save()
 
-    feeds = Feeds.objects.filter(author=user)
+    feeds = Feed.objects.filter(author = user)
     context = {
         'form' : RatingsForm(),
         'user' : user,

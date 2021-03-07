@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import *
 from user.models import User
 from .forms import *
+from django.contrib import messages
 
 def feeds_home(request):
 	if(request.method == 'POST'):
