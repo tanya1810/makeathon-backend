@@ -77,7 +77,7 @@ def user_profile_feeds(request, pk):
             user.ratings = calculate_ratings(pk)
             user.save()
 
-    feeds = Feed.objects.filter(author = user)
+    feeds = Feed.objects.filter(author=user)
     context = {
         'form' : RatingsForm(),
         'user' : user,
