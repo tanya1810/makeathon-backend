@@ -77,6 +77,9 @@
                     <p>
                       {{ commen.text }}
                     </p>
+                    {% if commen.by_user == request.user %}
+                        <a href="{% url 'delete-comment' commen.id %}">[Delete]</a>
+                    {% endif %}
                   </div>
                 </div>
               </div><!-- End comment #1 -->

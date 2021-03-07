@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .models import *
 from user.models import User
 from .forms import *
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+@login_required
 def feeds_home(request):
 	if(request.method == 'POST'):
 		form = AnswerForm(request.POST, request.FILES)
@@ -19,6 +21,7 @@ def feeds_home(request):
 	}
 	return render(request, 'home/feeds.html', context)
 
+@login_required
 def delete_feed(request, pk):
 	feed = Feed.objects.get(id=pk)
 	if(request.user == feed.author):
@@ -28,6 +31,7 @@ def delete_feed(request, pk):
 
 	return redirect('feeds')
 
+@login_required
 def my_post(request):
 	if(request.method == 'POST'):
 		form = AnswerForm(request.POST, request.FILES)
@@ -43,6 +47,7 @@ def my_post(request):
 	}
 	return render(request, 'home/my_feeds.html', context)
 
+@login_required
 def update_feed(request, id=None):
 	feed = Feed.objects.get(id=id)
 	if request.method == 'POST':
@@ -59,13 +64,12 @@ def update_feed(request, id=None):
 	}
 	return render(request, 'home/update_feed.html', context)
 
-
+@login_required
 def feed_details(request, pk):
 	feed = Feed.objects.get(id = pk)
-	comment = Comments.objects.filter(feed=feed)
+	comment = Comments.objects.filter(feed=feed).order_by('-id')
 	
 	if(request.method == 'POST'):
-
 		form = AddComment(request.POST)
 		if form.is_valid():
 			form.instance.by_user = request.user
@@ -78,3 +82,11 @@ def feed_details(request, pk):
 		'form' : form,
 	}
 	return render(request, 'home/feeds-single.html', context)
+
+@login_required
+def delete_comment(request, pk):
+	comment = Comments.objects.get(id=pk)
+	feed = Feed.objects.get(feed=comment).id
+	if(comment):
+		comment.delete()
+	return redirect('feed_details', pk=feed)

@@ -25,21 +25,21 @@
           <h3>My <span>Coupons</span></h3>
         </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="Search" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="text" class="form-control" name="q" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append">
               <button class="btn btn-danger" type="button">Search</button>
             </div>
           </div>
         <div class="row" style="display: flex; justify-content: center;">
-        {% for coupon in coupons %}
+        {% for coupo in coupon %}
           <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box">
               <!-- <div class="icon"><i class="fas fa-store"></i></div> -->
-              <h4 class="title"><a href="">{{ coupon.company.name }}</a></h4>
-              <p class="description">{{ coupon.unique_code }}</p>
-              <p class="description">{{ coupon.cost }}</p>
+              <h4 class="title"><a href="">{{ coupo.company.name }}</a></h4>
+              <p class="description">{{ coupo.unique_code }}</p>
+              <p class="description">{{ coupo.cost }}</p>
               <p class="description" style="border-style: solid; border-width: thin; margin-top: 25px;">
-                <a class="description" href = "">Delete</a>
+                <a class="description" href = "{% url 'issued' issu.id %}">Delete</a>
             </p>
             </div>
           </div>
