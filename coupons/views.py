@@ -45,3 +45,5 @@ def issued_coupons(request, pk = None):
 		'issued': issued,
 	}
 	return render(request, 'coupons/issued.html', context)
+def dashboard(request):
+	return render(request, 'coupons/dashboard.html')
