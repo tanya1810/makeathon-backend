@@ -39,7 +39,7 @@
               <p class="description">{{ coupo.unique_code }}</p>
               <p class="description">{{ coupo.cost }}</p>
               <p class="description" style="border-style: solid; border-width: thin; margin-top: 25px;">
-                <a class="description" href = "{% url 'issued' issu.id %}">Delete</a>
+                <a class="description" href = "{% url 'issued' coupo.id %}">Delete</a>
             </p>
             </div>
           </div>
