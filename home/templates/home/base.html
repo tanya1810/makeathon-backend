@@ -69,6 +69,7 @@
           <li class="dropdown" ><a href="#">Hey {{ user.username }}</a>
             <ul>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'user_profile' request.user.id %}">Profile</a></li>
             </ul>
           </li>
           {% else %}
