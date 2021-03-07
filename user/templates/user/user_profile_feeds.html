@@ -27,30 +27,58 @@
         <input type="submit" class="btn btn-danger" value="Rate">
     </form>
 </center>
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <div class="row">
-                {% for resource in resources %}
-                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
-                    <div class="box recommended">
-                        <span class="recommended-badge">By: {{resource.owner.name}}</span>
-                        <span class="recommended-badge" style="margin-top: 35px;">{{resource.owner.ratings}}/5</span>
-                        <h3>{{resource.title}}</h3>
-                        <iframe frameborder="0" scrolling="no"
-                            width="90%" height="20%"
-                            src="{{resource.preview.url}}">
-                        </iframe>
-                        <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
-                        <h3>Subject: {{resource.subject.subject_name}}</h3>
-                        <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
-                        <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                        </div>
-                        <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+
+<section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+        <div class="col-lg-12 mt-5 mt-lg-0" style="border: solid 1px rgba(0,0,0,0.5); padding: 20px; border-radius:10px;">
+          <h1>POST A DOUBT</h1>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <br>
+            <button class="btn btn-danger" type="submit" value="Post">Post</button>
+          </form>
         </div>
-    </section>
+
+        <div class="col-lg-12 mt-5 entries">
+          {% for feed in feeds %}
+          <article class="entry"> 
+
+            <div class="entry-img">
+              <img src="{{ feed.image.url }}" alt="" class="img-fluid">
+            </div>
+
+            <h2 class="entry-title">
+              <a href="blog-single.html">{{feed.title}}</a>
+            </h2>
+
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a>{{feed.post_type}}</a></li>
+              </ul>
+            </div>
+
+            <div class="entry-content">
+              <p> {{feed.description}}
+              </p>
+              <div style="display: flex;">
+                <div class="read-more">
+                  <a href="blog-single.html">Read More</a>
+                </div> &nbsp
+                <div class="read-more">
+                  <a href="{% url 'update_feed' feed.id%}">Update Feed</a>
+                </div>
+                </div>
+            </div>
+
+          </article> 
+
+          {% endfor %}
+
+      </div>
+
+    </div>
+  </section>
 {% endblock body %}

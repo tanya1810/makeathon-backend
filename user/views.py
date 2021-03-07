@@ -11,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 from resources.models import Resource
 from home.models import Feed
 
-
 def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
