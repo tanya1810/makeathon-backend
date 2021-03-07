@@ -15,7 +15,6 @@ class Feed(models.Model):
 		return self.title
 
 class Comments(models.Model):
-
 	by_user 			= models.ForeignKey(User, related_name= 'by_user', on_delete=models.CASCADE, null=False, blank=False)
 	feed 				= models.ForeignKey(Feed, related_name= 'feed', on_delete=models.CASCADE, null=True, blank=True)
 	text 				= models.CharField(max_length=200, null=False, blank=False)

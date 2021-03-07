@@ -37,11 +37,12 @@
               </div>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <button class="btn btn-danger" type="button">Subject</button>
+                  <button class="btn btn-danger" type="button">Subject Code</button>
                 </div>
-                <input type="text" class="form-control" name="subject" placeholder="Subject" aria-label="" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" name="subject" placeholder="Subject Code" aria-label="" aria-describedby="basic-addon1">
               </div>
               <button type="submit">Search</button>
+              <button href="{% url 'all-resources' %}">Clear Search</button>
             </form>
               <h2>Resources</h2>
             {% for resource in resources %}
@@ -55,7 +56,7 @@
                         src="{{resource.preview.url}}">
                     </iframe>
                     <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
-                    <h3>Subject: {{resource.subject.subject_name}}</h3>
+                    <h3>{{resource.subject.subject_code}}: {{resource.subject.subject_name}}</h3>
                     <p>{{resource.description}}</p>
                     <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
                     <div class="btn-wrap">

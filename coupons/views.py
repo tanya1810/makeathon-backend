@@ -33,3 +33,5 @@ def purchased(request, id=None):
 	}
 	return render(request, 'coupons/purchased_coupons.html', context)
 
+def dashboard(request):
+	return render(request, 'coupons/dashboard.html')
