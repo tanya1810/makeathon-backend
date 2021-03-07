@@ -35,6 +35,7 @@
                         </iframe>
                         <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
                         <h3>Subject: {{resource.subject.subject_name}}</h3>
+                        <p>{{resource.description}}</p>
                         <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
                         <div class="btn-wrap">
                             <a href="{% url 'update_resource' resource.id %}" class="btn-buy">Update</a>
