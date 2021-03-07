@@ -32,3 +32,4 @@ def purchased(request, id=None):
 		'coupons': coupons,
 	}
 	return render(request, 'coupons/purchased_coupons.html', context)
+
