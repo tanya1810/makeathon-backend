@@ -16,6 +16,7 @@
 
 <div class="section-title">
     <h1>{{user.name}}</h1>
+    <h2>Coins : {{user.coins}}</h2>
     <h3>{{user.ratings}}/5</h3>
 </div>
 <center>
@@ -27,30 +28,194 @@
         <input type="submit" class="btn btn-danger" value="Rate">
     </form>
 </center>
-    {<section id="pricing" class="pricing">
-        <div class="container">
-            <div class="row">
-                {% for resource in resources %}
-                <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
-                    <div class="box recommended">
-                        <span class="recommended-badge">By: {{resource.owner.name}}</span>
-                        <span class="recommended-badge" style="margin-top: 35px;">{{resource.owner.ratings}}/5</span>
-                        <h3>{{resource.title}}</h3>
-                        <iframe frameborder="0" scrolling="no"
-                            width="90%" height="20%"
-                            src="{{resource.preview.url}}">
-                        </iframe>
-                        <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
-                        <h3>Subject: {{resource.subject.subject_name}}</h3>
-                        <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
-                        <div class="btn-wrap">
-                            <a href="#" class="btn-buy">Buy Now</a>
-                        </div>
-                        <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+
+
+<section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <h3>Check our <span>Portfolio</span></h3>
+          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
         </div>
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">Resources</li>
+              <li data-filter=".filter-web">Feeds</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row portfolio-container">
+
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="row">
+                    {% for resource in resources %}
+                    <div class="col-lg-4 col-md-6 mt-4 mt-md-0 portfolio-item filter-app">
+                        <div class="box recommended">
+                            <span class="recommended-badge"><a href="{% url 'user_profile' resource.owner.id %}">By: {{resource.owner.name}}</a></span>
+                            <span class="recommended-badge" style="margin-top: 35px;">{{resource.owner.ratings}}/5</span>
+                            <h3>{{resource.title}}</h3>
+                            <iframe frameborder="0" scrolling="no"
+                                width="90%" height="20%"
+                                src="{{resource.preview.url}}">
+                            </iframe>
+                            <!-- <embed type="application/pdf" src="{{resource.preview.url}}" width="300px" height="200px" /> -->
+                            <h3>Subject: {{resource.subject.subject_name}}</h3>
+                            <h4>{{resource.cost}}  <i class="fas fa-coins"></i></h4>
+                            <div class="btn-wrap">
+                                <a href="#" class="btn-buy">Buy Now</a>
+                            </div>
+                            <span><button class="btn btn-danger"><i class="fas fa-heart"></i></button></span><span style="font-size: 18px;">{{resource.liked_by.count}}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section id="blog" class="blog">
+            <div class="container" data-aos="fade-up">
+
+              <div class="row">
+                {% for feed in feeds %}
+                <div class="col-lg-12 mt-5 entries portfolio-item filter-web">
+                  
+                  <div class="">
+                      
+                  </div>
+                  <article class="entry"> 
+
+                    <div class="entry-img">
+                      <img src="{{ feed.image.url }}" alt="" class="img-fluid">
+                    </div>
+
+                    <h2 class="entry-title">
+                      <a href="blog-single.html">{{feed.title}}</a>
+                    </h2>
+
+                    <div class="entry-meta">
+                      <ul>
+                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a>{{feed.post_type}}</a></li>
+                      </ul>
+                    </div>
+
+                    <div class="entry-content">
+                      <p> {{feed.description}}
+                      </p>
+                      <div style="display: flex;">
+                        <div class="read-more">
+                          <a href="blog-single.html">Read More</a>
+                        </div> &nbsp
+                        <div class="read-more">
+                          <a href="{% url 'update_feed' feed.id%}">Update Feed</a>
+                        </div>
+                        </div>
+                    </div>
+
+                  </article> 
+
+              </div>
+              {% endfor %}
+
+            </div>
+  </section>
+
+
+<!--           <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-1.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>App 1</h4>
+              <p>App</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-1.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-2.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Web 3</h4>
+              <p>Web</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-2.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-3.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>App 2</h4>
+              <p>App</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-3.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-4.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Card 2</h4>
+              <p>Card</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-4.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-5.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Web 2</h4>
+              <p>Web</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-5.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-6.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>App 3</h4>
+              <p>App</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-6.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-7.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Card 1</h4>
+              <p>Card</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-7.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-8.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Card 3</h4>
+              <p>Card</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-8.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <img src="{% static 'home/assets/img/portfolio/portfolio-9.jpg' %}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Web 3</h4>
+              <p>Web</p>
+              <a href="{% static 'home/assets/img/portfolio/portfolio-9.jpg' %}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
+              <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+ -->
+        </div>
+
+      </div>
     </section>
 {% endblock body %}
