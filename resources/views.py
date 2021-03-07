@@ -9,7 +9,21 @@ from Blockchainbackend.block import write_block, check_integrity
 # Create your views here.
 @login_required
 def all_resources(request):
+    year = request.GET.get('year') or None
+    branch = request.GET.get('branch') or None
+    subject = request.GET.get('subject') or None
+
     resources = Resource.objects.order_by('-id')
+
+    if(subject):
+        resources = resources.filter(subject=subject)
+    
+    if(branch):
+        resources = resources.filter(subject__yr_branch__branch=branch)
+    
+    if(year):
+        resources = resources.filter(subject__yr_branch__year=year)
+
     context = {
         'resources' : resources,
     }
@@ -50,10 +64,10 @@ def post_resource(request):
 
 @login_required
 def like_resource_1(request, pk):
-    resource = Resource.objects.get(id=pk, buyer=request.user)
-    if(resource):
-        resource.liked_by.add(request.user)
-        resource.save()
+    resource = Resource.objects.filter(id=pk, buyer=request.user)
+    if(resource.first()):
+        resource.first().liked_by.add(request.user)
+        resource.first().save()
     else:
         messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
     return redirect('all-resources')
@@ -66,10 +80,10 @@ def dislike_resource_1(request, pk):
     return redirect('all-resources')
 
 def like_resource_2(request, pk):
-    resource = Resource.objects.get(id=pk, buyer=request.user)
-    if(resource):
-        resource.liked_by.add(request.user)
-        resource.save()
+    resource = Resource.objects.filter(id=pk, buyer=request.user)
+    if(resource.first()):
+        resource.first().liked_by.add(request.user)
+        resource.first().save()
     else:
         messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
     return redirect('my_bought_resources')
@@ -82,10 +96,10 @@ def dislike_resource_2(request, pk):
     return redirect('my_bought_resources')
 
 def like_resource_3(request, pk):
-    resource = Resource.objects.get(id=pk, buyer=request.user)
-    if(resource):
-        resource.liked_by.add(request.user)
-        resource.save()
+    resource = Resource.objects.filter(id=pk, buyer=request.user)
+    if(resource.first()):
+        resource.first().liked_by.add(request.user)
+        resource.first().save()
     else:
         messages.add_message(request, messages.INFO, 'You\'ll need to buy this course to like it.')
     return redirect('my_posted_resources')
