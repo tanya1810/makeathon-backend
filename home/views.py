@@ -32,7 +32,7 @@ def my_post(request):
 	if(request.method == 'POST'):
 		form = AnswerForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.instance.from_user = request.user
+			form.instance.author = request.user
 			form.save()
 	
 	form = AnswerForm()
